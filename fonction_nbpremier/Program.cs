@@ -49,7 +49,7 @@ namespace nbrepremier
             do
             {
                 reste = _Nbutilisateur % Diviseur;
-                if (reste == 0)
+                if (reste == 0 && _Nbutilisateur !=2)
                 {
                     Premier = false;
                     break;
