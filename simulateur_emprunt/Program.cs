@@ -49,6 +49,9 @@ namespace simulateur_emprunt
 
             mensualite = credit.CalculMensualite(capitalEmprunte, tauxInteretMensuel, nbMois);
             Console.WriteLine(" L'échéance à payer chaque mois sera de {0:#,###.00} euros pour un capital emprunté de {1:#,###.00} ", mensualite, capitalEmprunte);
+            credit.AfficherTableau_Amrt(capitalEmprunte, tauxInteretMensuel, nbMois, mensualite);
+
+
             Console.ReadKey();
         }
     }
