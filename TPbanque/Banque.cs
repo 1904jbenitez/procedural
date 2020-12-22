@@ -11,10 +11,15 @@ namespace TPbanque
         //attributs
            private int nombreCompte;
            private Compte[] lesComptes;
+
+        private string nomBanque;
+        private string localisation;
         //Constructeur 
 
-        public Banque()
+        public Banque(string _nom, string _loc)
             {
+            this.localisation = _loc;
+            this.nomBanque = _nom;
                 lesComptes = new Compte[20];
             this.nombreCompte = 0;
 
@@ -37,22 +42,86 @@ namespace TPbanque
             this.AjouterCompte(client2);
             this.AjouterCompte(client3);
         }
+
+
         public override string ToString()
-        { string MesComptes = ""; 
-            foreach (Compte unclient in this.lesComptes)
+        { string MesComptes = " Les differents comptes de la banque "+this.nomBanque+" basé à " + this.localisation+" sont :\n" ;
+
+            for (int i = 0; i <this.nombreCompte; i++)
             {
-                MesComptes += unclient.ToString() + "/n";
+                MesComptes+=this.lesComptes[i].ToString()+"\n" ;
             }
+         
+
+            //{
+            //    MesComptes += unclient.ToString() + "/n";
+            //}
 
             return MesComptes;
               
         }
+        public Compte RendCompte(string _numeroCompte)
+        {
+
+            for (int i = 0; i < this.nombreCompte; i++)
+            {
+                if (_numeroCompte == lesComptes[i].GetNumero)
+                {
+                    return lesComptes[i];
+                }
+            }
+
+            //if (lesComptes.Contains(_numeroCompte)==true)
+
+            //{
+
+            //}
+
+
+
+            return null;
+        }
+
+        public bool Virement(string _numdebiteur, string _numbeneficiaire, double _montant)
+        {
+            if (RendCompte(_numdebiteur) != null && RendCompte(_numbeneficiaire) != null)
+            {
+                if ((RendCompte(_numdebiteur)).Debiter(_montant) == true)
+                {
+                    (RendCompte(_numbeneficiaire)).Crediter(_montant);
+                    Console.WriteLine("Le virement a bien été effectué!!!Youpi");
+                    return true;
+                }
+                else
+                {
+                    
+                    Console.WriteLine("Virement refusé, dépassement de découvert autorisé");
+
+                    return false;
+                }
+
+
+
+
+            }
+            else
+            {
+                Console.WriteLine("Virement refusé, compte debiteur ou beneficiaire inexistant");
+                return false;
+            }
+
+
+           
+
+
+        }
+
+
 
 
 
 
     }
 
-
-
+   
 }

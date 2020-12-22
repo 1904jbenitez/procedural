@@ -108,15 +108,15 @@ namespace TPbanque
         /// <param name="_montant"></param>
         public bool Debiter(double _montant)
         {
-            if ((SoldeCompte -= _montant) <Decouvert)
+            if ((SoldeCompte - _montant) <Decouvert)
             {
-                this.Crediter(_montant);
+                //this.Crediter(_montant);
                 //SoldeCompte += _montant;
                 return false;
             }
             else
             {
-               // SoldeCompte -= _montant;
+                SoldeCompte -= _montant;
                 return true;
             }
             
